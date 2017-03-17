@@ -74,7 +74,7 @@ describe('Closures', function(){
 					balance = balance - outcome;
 				},
 				getBalance: function() {
-					return balance;
+					return balance.toFixed(2) == balance ? balance : balance.toFixed(2);
 				}
 			};
 		}
@@ -97,7 +97,9 @@ describe('Closures', function(){
 		expect(f2.getBalance()).toEqual(0);
 		f2.saveIncome(1000);
 		f2.saveOutcome(29.99);
+		expect(f2.getBalance()).toEqual(970.01);
 		f2.saveOutcome(718.85);
+		expect(f2.getBalance()).toEqual(251.16);
 		f2.saveIncome(150);
 		expect(f2.getBalance()).toEqual(401.16);
 		f2.saveOutcome(396.81);
