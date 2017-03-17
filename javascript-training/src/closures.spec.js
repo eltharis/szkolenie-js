@@ -1,4 +1,4 @@
-describe('Closures', function(){
+fdescribe('Closures', function(){
 
 	it('can hold private data - incrementer', function(){
 		// write incrementer function below
@@ -7,9 +7,10 @@ describe('Closures', function(){
 		// the value itself is not directly accessible from the outside
 
 		function incrementer(){
-			var i = 1;
+			var i = 0;
 			return function() {
-				return i++;
+				i++;
+				return i;
 			};
 		}
 
@@ -74,7 +75,8 @@ describe('Closures', function(){
 					balance = balance - outcome;
 				},
 				getBalance: function() {
-					return balance.toFixed(2) == balance ? balance : balance.toFixed(2);
+					// WTF...?!
+					return parseFloat(balance.toFixed(2)) === balance ? balance : parseFloat(balance.toFixed(2));
 				}
 			};
 		}
