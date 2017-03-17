@@ -66,16 +66,18 @@ fdescribe('Closures', function(){
 		// `getBalance` method subtracts all outcomes from all incomes
 
 		function finanseStorage(){
-			var balance = 0;
+			var incomes = [];
+			var outcomes = [];
 			return {
 				saveIncome: function(income) {
-					balance = balance + income;
+					incomes.push(income);
 				},
 				saveOutcome: function(outcome) {
-					balance = balance - outcome;
+					outcomes.push(outcome);
 				},
 				getBalance: function() {
-					// WTF...?!
+					var sum = (a, b) => a + b;
+					var balance = incomes.reduce(sum, 0) - outcomes.reduce(sum, 0);
 					return parseFloat(balance.toFixed(2)) === balance ? balance : parseFloat(balance.toFixed(2));
 				}
 			};
