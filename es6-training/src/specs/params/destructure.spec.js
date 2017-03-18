@@ -2,12 +2,12 @@ describe('Destructuring', () => {
 
   describe('with Objects', () => {
 
-    it('can be used to pull apart objects', () => {
+    fit('can be used to pull apart objects', () => {
       // Using destructuring, call `getAddress()` and create a 'city', 'voivodeship' and 'zip' variable.
       var address = getAddress();
-      // var city = address.city;
-      // var voivodeship = address.voivodeship;
-      // var zip = address.zip;
+      var {city} = address;
+      var {voivodeship} = address;
+      var {zip} = address;
       expect(city).toBe('Kazimierz Dolny')
       expect(voivodeship).toBe('lubelskie')
       expect(zip).toBe(24120)
@@ -18,8 +18,10 @@ describe('Destructuring', () => {
       expect(address).not.toBeDefined();
     })
 
-    it('can alias destructured variables', () => {
+    fit('can alias destructured variables', () => {
       // Using destructuring, call `getAddress()` and pull the city, voivodeship and zip out, and alias them to c, v, z, respectively
+      var address = getAddress();
+      var {c, v, z} = {c:address.city, v:address.voivodeship, z:address.zip};
       expect(c).toBe('Kazimierz Dolny')
       expect(v).toBe('lubelskie')
       expect(z).toBe(24120)
@@ -40,12 +42,14 @@ describe('Destructuring', () => {
 
     it('can be used to pull apart arrays', () => {
       // Call getNumbers and pull the first value out as `one` and the second as `two`
+      var [one, two] = getNumbers();
       expect(one).toBe(1)
       expect(two).toBe(2)
     })
 
     it('can skip indexes in arrays', () => {
       // Call getNumbers and pull the first value out as `one` and the third as `three`
+      var [one, , three] = getNumbers();
       expect(one).toBe(1)
       expect(three).toBe(3)
       expect(() => noop(two)).toThrow()
@@ -53,6 +57,7 @@ describe('Destructuring', () => {
 
     it('can reach nested arrays', () => {
       // Call getNestedNumbers and pull the first value out as `one`, the 3 as `three` and 6 as `sixth`.
+      var [one, , three, , , six] = getNumbers();
       expect(one).toBe(1)
       expect(three).toBe(3)
       expect(six).toBe(6)
