@@ -80,9 +80,6 @@ describe('Functional programming', function(){
 
 		// function execute...
 		function execute(operations, start) {
-			// var result = start;
-			// operations.forEach(function(el) { result = el(result); });
-			// return result;
 			return operations.reduce(function(value, func) { return func(value); }, start);
 		}
 		var start = 2;
