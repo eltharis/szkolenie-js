@@ -5,11 +5,11 @@ describe('rest parameters', () => {
       return others
     }
 
-    expect(resty().length).toBe(/* YOUR ANSWER */)
-    expect(resty(1).length).toBe(/* YOUR ANSWER */)
-    expect(resty(1, 2).length).toBe(/* YOUR ANSWER */)
-    expect(resty(1, 2, 3).length).toBe(/* YOUR ANSWER */)
-    expect(resty(1, 2, 3, undefined, 5, undefined, 7, undefined, 9, 10).length).toBe(/* YOUR ANSWER */)
+    expect(resty().length).toBe(0)
+    expect(resty(1).length).toBe(0)
+    expect(resty(1, 2).length).toBe(0)
+    expect(resty(1, 2, 3).length).toBe(1)
+    expect(resty(1, 2, 3, undefined, 5, undefined, 7, undefined, 9, 10).length).toBe(8)
   })
 
   it('has a different length than `arguments`', () => {
