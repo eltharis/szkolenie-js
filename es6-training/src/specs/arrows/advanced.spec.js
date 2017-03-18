@@ -3,7 +3,7 @@ describe('arrow functions', () => {
   it('can return objects', () => {
     // define following as arrow functions
     // look out for object literal syntax in arrow functions!
-    let makePerson;
+    let makePerson = (first, last) => ({first, last});
 
     expect(makePerson('John', 'Lennon')).toEqual({first: 'John', last: 'Lennon'})
     expect(makePerson('Paul', 'McCartney')).toEqual({first: 'Paul', last: 'McCartney'})
@@ -14,6 +14,13 @@ describe('arrow functions', () => {
     // adder as arrow function (it stores first parameter in a closure and return a function accepting second parameter)
     // add5 and minus10 as `adder` calls (curried functions, they actually accept the second parameter and perform actual add)
     let adder, add5, minus10;
+
+    adder =
+      a =>
+        b => a + b;
+    
+    add5 = adder(5);
+    minus10 = adder(-10);
 
     expect(add5(4)).toBe(9)
     expect(add5(-4)).toBe(1)
@@ -48,18 +55,10 @@ describe('arrow functions', () => {
 
     // REPLACE ALL REGULAR FUNCTION WITH ARROW FUNCTIONS
     const shoppingList = data
-      .filter(function(d) {
-        return d.type != 'Clothes'
-      }) // Remove Clothes
-      .filter(function(d) {
-        return  d.price < 5
-      }) // Find only remaining items with price < 5
-      .sort(function(a, b) {
-        return b.price * b.qty - a.price * a.qty
-      }) // Sort by total price, desc
-      .map(function(d) {
-        return d.name
-      }) // Pull just the name from each item
+      .filter(d => d.type != 'Clothes') // Remove Clothes
+      .filter(d => d.price < 5) // Find only remaining items with price < 5
+      .sort((a, b) => b.price * b.qty - a.price * a.qty) // Sort by total price, desc
+      .map(d => d.name) // Pull just the name from each item
  
     expect(shoppingList.shift()).toBe('Beer')
     expect(shoppingList.shift()).toBe('Chips')
