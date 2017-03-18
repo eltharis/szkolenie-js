@@ -76,7 +76,7 @@ fdescribe('Closures', function(){
 					outcomes.push(outcome);
 				},
 				getBalance: function() {
-					var sum = (a, b) => a + b;
+					var sum = function(a, b) { return a + b; };
 					var balance = incomes.reduce(sum, 0) - outcomes.reduce(sum, 0);
 					return parseFloat(balance.toFixed(2)) === balance ? balance : parseFloat(balance.toFixed(2));
 				}
