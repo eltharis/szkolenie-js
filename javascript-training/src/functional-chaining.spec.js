@@ -1,4 +1,4 @@
-fdescribe('Functional programming', function(){
+describe('Functional programming', function(){
 
 	var list3 = [3, 6, 12, 24, 36, 39, 51, 63];
 	var list5 = [5, 15, 30, 40, 45, 55, 105];
