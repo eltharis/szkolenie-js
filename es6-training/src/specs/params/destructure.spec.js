@@ -15,6 +15,7 @@ describe('Destructuring', () => {
 
     it('sets missing values to undefined', () => {
       // Using destructuring, call `getAddress()` and create an 'address' variable.
+      var {address} = getAddress();
       expect(address).not.toBeDefined();
     })
 
