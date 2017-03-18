@@ -1,4 +1,4 @@
-describe('arrow functions', () => {
+fdescribe('arrow functions', () => {
 
     it('can replace simple traditional functions', () => {
         // Write two functions that take two parameters and return their sum
@@ -39,7 +39,7 @@ describe('arrow functions', () => {
         })
     })
 
-    it('can replace complex traditional functions', () => {
+    fit('can replace complex traditional functions', () => {
         // Write two functions that implement Fibonacci sequence
         // 'fnFib' - as a regular function
         // 'arrowFib' - as an arrow function, try NOT to use curly brackets {}
@@ -51,24 +51,23 @@ describe('arrow functions', () => {
         let fnFib, arrowFib;
 
         fnFib = function(n) {
-            let tmp, prev = 0, act = 1;
-            for(let i = 0; i < n; i++) {
-                tmp = act;
-                act += prev;
-                prev = tmp;
-            }
+            let [prev, act] = [0, 1];
+            while(n--) { [prev, act] = [act, prev + act]; }
             return prev;
         }
 
-        arrowFib = n => {
-            let tmp, prev = 0, act = 1;
-            for(let i = 0; i < n; i++) {
-                tmp = act;
-                act += prev;
-                prev = tmp;
-            }
-            return prev;
-        }
+        arrowFib = n => n <= 1 ? n : arrowFib(n-1) + arrowFib(n-2);
+
+        // arrowFib = n => {
+        //     let tmp, prev = 0, act = 1;
+        //     for(let i = 0; i < n; i++) {
+        //         var [act, prev] = [act+prev, act];
+        //         tmp = act;
+        //         act += prev;
+        //         prev = tmp;
+        //     }
+        //     return prev;
+        // }
 
         [fnFib, arrowFib].forEach(function(fn){
             expect(fn(0)).toBe(0);
