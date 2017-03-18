@@ -1,4 +1,4 @@
-describe('arrow functions', () => {
+fdescribe('arrow functions', () => {
 
     it('can replace simple traditional functions', () => {
         // Write two functions that take two parameters and return their sum
@@ -6,6 +6,8 @@ describe('arrow functions', () => {
         // 'arrowAdd' - as an arrow function
 
         let fnAdd, arrowAdd;
+        fnAdd = function(a, b) { return a + b; };
+        arrowAdd = (a, b) => a + b;
 
         expect(fnAdd.length).toBe(2);
         expect(arrowAdd.length).toBe(2);
@@ -16,6 +18,10 @@ describe('arrow functions', () => {
         // Write following lambda functions, performing subtraction, multiplication and division
 
         let arrowSub, arrowMul, arrowDiv;
+        
+        arrowSub = (a, b) => a - b;
+        arrowMul = (a, b) => a * b;
+        arrowDiv = (a, b) => b !== 0 ? a / b : 0;
 
         it('subtracts numbers correctly', () => {
             expect(arrowSub(20, -15)).toEqual(35)
@@ -44,6 +50,26 @@ describe('arrow functions', () => {
 
         let fnFib, arrowFib;
 
+        fnFib = function(n) {
+            let tmp, prev = 0, act = 1;
+            for(let i = 0; i < n; i++) {
+                tmp = act;
+                act += prev;
+                prev = tmp;
+            }
+            return prev;
+        }
+
+        arrowFib = n => {
+            let tmp, prev = 0, act = 1;
+            for(let i = 0; i < n; i++) {
+                tmp = act;
+                act += prev;
+                prev = tmp;
+            }
+            return prev;
+        }
+
         [fnFib, arrowFib].forEach(function(fn){
             expect(fn(0)).toBe(0);
             expect(fn(1)).toBe(1);
@@ -64,7 +90,7 @@ describe('arrow functions', () => {
     const person = {
       name: 'Jarosław',
       greetFriends: function(friends) {
-        friends.forEach(function(friend) {
+        friends.forEach(friend => {
           console.log(this.name + ' greets to ' + friend)
         })
       },
