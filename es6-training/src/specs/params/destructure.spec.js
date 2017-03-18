@@ -2,7 +2,7 @@ describe('Destructuring', () => {
 
   describe('with Objects', () => {
 
-    fit('can be used to pull apart objects', () => {
+    it('can be used to pull apart objects', () => {
       // Using destructuring, call `getAddress()` and create a 'city', 'voivodeship' and 'zip' variable.
       var address = getAddress();
       var {city} = address;
@@ -18,7 +18,7 @@ describe('Destructuring', () => {
       expect(address).not.toBeDefined();
     })
 
-    fit('can alias destructured variables', () => {
+    it('can alias destructured variables', () => {
       // Using destructuring, call `getAddress()` and pull the city, voivodeship and zip out, and alias them to c, v, z, respectively
       var address = getAddress();
       var {c, v, z} = {c:address.city, v:address.voivodeship, z:address.zip};
@@ -57,7 +57,7 @@ describe('Destructuring', () => {
 
     it('can reach nested arrays', () => {
       // Call getNestedNumbers and pull the first value out as `one`, the 3 as `three` and 6 as `sixth`.
-      var [one, , three, , , six] = getNumbers();
+      var [one, ,[ three, ,[ , six]]] = getNestedNumbers();
       expect(one).toBe(1)
       expect(three).toBe(3)
       expect(six).toBe(6)
