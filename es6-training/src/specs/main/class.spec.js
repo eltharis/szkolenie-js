@@ -22,6 +22,12 @@ describe('class', () => {
     // Create a Musician class with a constructor
     // Make your class default (using default params) the instrument to 'guitar'
 
+    class Musician {
+      constructor(instrument = 'guitar') {
+        this.instrument = instrument;
+      }
+    }
+
     const john = new Musician()
     const ringo = new Musician('drums')
 
