@@ -1,4 +1,4 @@
-fdescribe('Functional programming Basics', function(){
+describe('Functional programming Basics', function(){
 	// database is defined in data/data.js file
 	var users = db.getUsers();
 

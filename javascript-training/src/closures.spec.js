@@ -1,4 +1,4 @@
-fdescribe('Closures', function(){
+describe('Closures', function(){
 
 	it('can hold private data - incrementer', function(){
 		// write incrementer function below
