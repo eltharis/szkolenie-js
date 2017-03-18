@@ -32,6 +32,7 @@ describe('Destructuring', () => {
 
     it('can destructure nested variables', () => {
       // Using destructuring, call `getAddress()` and create an 'lat' and 'long' variables.
+      var {coords:{lat, long}} = getAddress();
       expect(lat).toBe(51.3180409)
       expect(long).toBe(21.9542483)
       expect(() => noop(coords)).toThrow()
