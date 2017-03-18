@@ -21,8 +21,7 @@ describe('Destructuring', () => {
 
     it('can alias destructured variables', () => {
       // Using destructuring, call `getAddress()` and pull the city, voivodeship and zip out, and alias them to c, v, z, respectively
-      var address = getAddress();
-      var {c, v, z} = {c:address.city, v:address.voivodeship, z:address.zip};
+      var {city:c, voivodeship:v, zip:z} = getAddress();
       expect(c).toBe('Kazimierz Dolny')
       expect(v).toBe('lubelskie')
       expect(z).toBe(24120)
