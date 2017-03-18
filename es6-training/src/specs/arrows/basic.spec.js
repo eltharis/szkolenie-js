@@ -1,4 +1,4 @@
-fdescribe('arrow functions', () => {
+describe('arrow functions', () => {
 
     it('can replace simple traditional functions', () => {
         // Write two functions that take two parameters and return their sum
