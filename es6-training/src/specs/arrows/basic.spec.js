@@ -1,4 +1,4 @@
-fdescribe('arrow functions', () => {
+describe('arrow functions', () => {
 
     it('can replace simple traditional functions', () => {
         // Write two functions that take two parameters and return their sum
@@ -39,7 +39,7 @@ fdescribe('arrow functions', () => {
         })
     })
 
-    fit('can replace complex traditional functions', () => {
+    it('can replace complex traditional functions', () => {
         // Write two functions that implement Fibonacci sequence
         // 'fnFib' - as a regular function
         // 'arrowFib' - as an arrow function, try NOT to use curly brackets {}
