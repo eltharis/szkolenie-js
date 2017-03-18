@@ -5,6 +5,12 @@ describe('class', () => {
     // Add a constructor that takes one param, the instrument.
     // Set this.instrument to the instrument passed in
 
+    class Musician {
+      constructor(instrument) {
+        this.instrument = instrument;
+      }
+    }
+
     const musician = new Musician()
     const ringo = new Musician('drums')
 

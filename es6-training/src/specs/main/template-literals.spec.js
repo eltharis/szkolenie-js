@@ -11,7 +11,7 @@ describe('Template literals', () => {
       ],
     }
     // construct a string using template literal string interpolation
-    const personsFriends = ``
+    const personsFriends = `${person.name} has 4 friends: ${person.friends.join(', ')}`
 
     expect(personsFriends).toBe(
       'Jarosław has 4 friends: Antoni, Andrzej, Krystyna, Wiktor'
@@ -20,15 +20,20 @@ describe('Template literals', () => {
 
   it('should support multi-line strings', () => {
     // construct a string with multiple lines without needing escaped newline characters
-    const multiLine = ``
+    const multiLine = `
+    Oh
+    my
+    dear
+    so much fun!`
 
     expect(multiLine).toBe('\n    Oh\n    my\n    dear\n    so much fun!')
   })
 
   it('should support string escaping', () => {
     // escape a string in a template literal for each of these
-    expect().toBe('Hi\nthere!')
-    expect().toBe('This is `escaped` backtics')
+    expect(`Hi
+there!`).toBe('Hi\nthere!')
+    expect(`This is \`escaped\` backtics`).toBe('This is `escaped` backtics')
   })
 
   // you likely wont often use tagging, but it can be handy!
@@ -40,7 +45,7 @@ describe('Template literals', () => {
 
     function tagIt(literalString, ...interpolatedParts) {
       // implement this function to make the test pass
-      return `fixme`
+      return literalString[0] + 'super-cool ' + interpolatedParts[0] + literalString[1] + 'really ' + interpolatedParts[1] + literalString[2] ;
     }
   })
 
@@ -48,7 +53,10 @@ describe('Template literals', () => {
     // Using tagged template strings, write journey function
     // that will accept following 3 template strings
     // and return a string describing the journey
-    let journey;
+    let journey =
+      a =>
+        b =>
+          c => `${a}, then ${b} and finally ${c}!`;
 
     expect(journey `Warsaw` `Poznan` `Berlin`).toBe('Warsaw, then Poznan and finally Berlin!')
     expect(journey `Poland` `Czech` `Austria`).toBe('Poland, then Czech and finally Austria!')
