@@ -1,4 +1,4 @@
-describe('Functional programming', function(){
+fdescribe('Functional programming', function(){
 
 	var list3 = [3, 6, 12, 24, 36, 39, 51, 63];
 	var list5 = [5, 15, 30, 40, 45, 55, 105];
@@ -10,10 +10,10 @@ describe('Functional programming', function(){
 
 		// code should look like: collection.map(fn)
 
-		var multiplyBy3;
-		var multiplyBy5;
-		var list3times3;
-		var list5times5;
+		var multiplyBy3 = function(el) { return el*3; };
+		var multiplyBy5 = function(el) { return el*5; };
+		var list3times3 = list3.map(multiplyBy3);
+		var list5times5 = list5.map(multiplyBy5);
 
 		expect(typeof multiplyBy3).toEqual("function");
 		expect(multiplyBy3.length).toEqual(1);
@@ -34,11 +34,11 @@ describe('Functional programming', function(){
 
 		// code should look like: collection.map(fn).filter(fn)
 
-		var multiplyBy3; // reuse
-		var multiplyBy5; // reuse
-		var isEven;
-		var list3times3filteredEven;
-		var list5times5filteredEven;
+		var multiplyBy3 = function(el) { return el*3; };; // reuse
+		var multiplyBy5 = function(el) { return el*5; };; // reuse
+		var isEven = function(el) { return el%2 === 0; };
+		var list3times3filteredEven = list3.filter(isEven).map(multiplyBy3);
+		var list5times5filteredEven = list5.filter(isEven).map(multiplyBy5);
 
 		expect(typeof isEven).toEqual("function");
 		expect(isEven.length).toEqual(1);
@@ -56,12 +56,12 @@ describe('Functional programming', function(){
 
 		// code should look like: collection.map(fn).filter(fn).reduce(fn)
 
-		var multiplyBy3; // reuse
-		var multiplyBy5; // reuse
-		var isEven; // reuse
-		var sum;
-		var list3times3filteredEvenSum;
-		var list5times5filteredEvenSum;
+		var multiplyBy3 = function(el) { return el*3; };; // reuse
+		var multiplyBy5 = function(el) { return el*5; };; // reuse
+		var isEven = function(el) { return el%2 === 0; };
+		var sum = function(a, b) { return a + b; };
+		var list3times3filteredEvenSum = list3.filter(isEven).map(multiplyBy3).reduce(sum, 0);
+		var list5times5filteredEvenSum = list5.filter(isEven).map(multiplyBy5).reduce(sum, 0);
 
 		expect(typeof sum).toEqual("function");
 		expect(sum.length).toEqual(2);
@@ -79,7 +79,12 @@ describe('Functional programming', function(){
 		// don't use FOR loops, use functional programming
 
 		// function execute...
-
+		function execute(operations, start) {
+			// var result = start;
+			// operations.forEach(function(el) { result = el(result); });
+			// return result;
+			return operations.reduce(function(value, func) { return func(value); }, start);
+		}
 		var start = 2;
 		var operations = [
 			function(a){ return 8 * a - 10; },
