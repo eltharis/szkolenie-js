@@ -5,8 +5,10 @@ describe('REST API promises', () => {
     // that is asynchronously resolved with list of nationalities
     //
     // use API.getNationalities function to fetch data and make the `expect` call pass
-
-    expect(nationalities).toEqual(["US", "UK", "DE", "FR"])
+    API.getNationalities().then((nationalities) => {
+      expect(nationalities).toEqual(["US", "UK", "DE", "FR"])
+      done();
+    }).catch(error => console.log('error'));
   })
 
   it('handles getUser call', (done) => {
@@ -14,8 +16,11 @@ describe('REST API promises', () => {
     // that is asynchronously resolved with data of the user, given by id
     //
     // use API.getUser function to fetch appropriate user and make the `expect` call pass
-
-    expect(user.name).toBe("Tiara Will")
+    API.getUser(7344).then(user => {
+      expect(user.name).toBe("Tiara Will")
+      done();
+    }).catch(error => console.log('error'));
+    
   })
 
   it('handles getUsersByNationality call', (done) => {
@@ -23,18 +28,27 @@ describe('REST API promises', () => {
     // that is asynchronously resolved with list of all users of a given nationality
     //
     // use API.getUsersByNationality function to fetch appropriate users and make the `expect` call pass
+    const p1 = API.getUsersByNationality('UK');
+    const p2 = API.getUsersByNationality('US');
+    const p3 = API.getUsersByNationality('FR');
+    const p4 = API.getUsersByNationality('DE');
 
-    expect(usersUK.length).toBe(30)
-    expect(usersUS.length).toBe(25)
-    expect(usersFR.length).toBe(24)
-    expect(usersDE.length).toBe(39)
+    Promise.all([p1, p2, p3, p4]).then(values => {
+      let [usersUK, usersUS, usersFR, usersDE] = values;
+      expect(usersUK.length).toBe(30)
+      expect(usersUS.length).toBe(25)
+      expect(usersFR.length).toBe(24)
+      expect(usersDE.length).toBe(39)
+      done();
+    });
   })
 
   it('should perform a simple business domain scenario', (done) => {
     // write a function which will calculate and return total salaries of users filtered by nationality
 
     function getTotalNationalSalary(nationality){
-      // function body
+      return API.getUsersByNationality(nationality)
+          .then(users => users.reduce((previous, actual) => previous + actual.salary, 0));
     }
 
     Promise.all([
@@ -59,7 +73,11 @@ describe('REST API promises', () => {
     // the response should be a map: { UK: amount, US: amount, ...}
 
     function getTotalSalariesByNationality(){
-      // function body
+      const promises = [API.getUsersByNationality('UK'), API.getUsersByNationality('US'), API.getUsersByNationality('FR'), API.getUsersByNationality('DE')]
+      return Promise.all(promises).then(results => {
+        let [UK, US, FR, DE] = results.map(users => users.reduce((prev, act) => prev + act.salary, 0))
+        return {UK, US, FR, DE};
+      })
     }
 
     getTotalSalariesByNationality()

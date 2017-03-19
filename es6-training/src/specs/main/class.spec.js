@@ -1,4 +1,4 @@
-fdescribe('class', () => {
+describe('class', () => {
 
   it('has a constructor for initialization', () => {
     // Create a Musician class

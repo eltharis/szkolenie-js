@@ -40,7 +40,7 @@ describe('rest parameters', () => {
     myFunction()
   })
 
-  fdescribe('gimmePairs function', function() {
+  describe('gimmePairs function', function() {
     // write function `gimmePairs` which accepts dynamic number of parameters
     // and returns an array of all possible pairs
 
