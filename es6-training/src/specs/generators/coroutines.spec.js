@@ -8,7 +8,11 @@ describe('coroutines', () => {
     // find appropriate users in src/data.js file
 
     function* fetchUsers(){
-      // coroutine body
+      let user1 = yield API.getUser(4074);
+      let user2 = yield API.getUser(8066);
+      let user3 = yield API.getUser(2029);
+      let user4 = yield API.getUser(6054);
+      return [user1, user2, user3, user4];
     }
 
     async(fetchUsers)()
@@ -27,7 +31,11 @@ describe('coroutines', () => {
     // the data expectations are the same as in previous exercise
 
     function* fetchUsers(){
-      // coroutine body
+      let user1 = API.getUser(4074);
+      let user2 = API.getUser(8066);
+      let user3 = API.getUser(2029);
+      let user4 = API.getUser(6054);
+      return Promise.all([user1, user2, user3, user4]);
     }
 
     async(fetchUsers)()
@@ -44,7 +52,8 @@ describe('coroutines', () => {
     // write a coroutine which will calculate and return total salaries of users filtered by nationality
 
     function* getTotalNationalSalary(nationality){
-      // coroutine body
+      let salary = API.getUsersByNationality(nationality).then(users => users.reduce((previous, actual) => { return previous + actual.salary}, 0))
+      return salary;
     }
 
     let asyncGetNationalSalary = async(getTotalNationalSalary)
@@ -70,7 +79,17 @@ describe('coroutines', () => {
     // the response should be a map: { UK: amount, US: amount, ...}
 
     function* getTotalSalariesByNationality(){
-      // coroutine body
+      let usersByNationalities = [
+        API.getUsersByNationality('US'),
+        API.getUsersByNationality('UK'),
+        API.getUsersByNationality('DE'),
+        API.getUsersByNationality('FR')
+      ];
+      let promise = Promise.all(usersByNationalities).then(results => {
+        let [US, UK, DE, FR] = results.map(users => users.reduce((previous, actual) => { return previous + actual.salary}, 0));
+        return {US, UK, DE, FR};
+      });
+      return promise;
     }
 
     async(getTotalSalariesByNationality)()
