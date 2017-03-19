@@ -48,7 +48,7 @@ describe('REST API promises', () => {
 
     function getTotalNationalSalary(nationality){
       return API.getUsersByNationality(nationality)
-          .then(users => users.reduce((previous, actual) => previous + actual.salary, 0));
+          .then(users => users.reduce((previous, actual) => { return previous + actual.salary; }, 0));
     }
 
     Promise.all([
@@ -73,11 +73,16 @@ describe('REST API promises', () => {
     // the response should be a map: { UK: amount, US: amount, ...}
 
     function getTotalSalariesByNationality(){
-      const promises = [API.getUsersByNationality('UK'), API.getUsersByNationality('US'), API.getUsersByNationality('FR'), API.getUsersByNationality('DE')]
+      const promises = [
+        API.getUsersByNationality('UK'), 
+        API.getUsersByNationality('US'), 
+        API.getUsersByNationality('FR'), 
+        API.getUsersByNationality('DE')
+      ]
       return Promise.all(promises).then(results => {
-        let [UK, US, FR, DE] = results.map(users => users.reduce((prev, act) => prev + act.salary, 0))
+        let [UK, US, FR, DE] = results.map(users => users.reduce((prev, act) => { return prev + act.salary; }, 0))
         return {UK, US, FR, DE};
-      })
+      });
     }
 
     getTotalSalariesByNationality()
